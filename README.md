@@ -20,4 +20,4 @@ Linux has a long-standing bug with Caps lock key having weird behavior. When ena
 
 ## Theming 
 Theming in linux is a bit all over the place. I was able to get most of the theming I wanted using `.Xresources` & `~/.config/gtk-3.0/settings.ini`   
-For my themeing, I used Tamzen font but you could use anything.
+For my themeing, I used Tamzen font but you could use anything (you will have to also update the dwm/st patches).
