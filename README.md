@@ -3,7 +3,14 @@
 ## nvidia-driver
 Installing through apt is broken on Debian 13 (currently at least?)  
 https://www.nvidia.com/en-us/drivers/unix/  
-Download directly from here.  
+Download directly from here.     
+
+# x11 multi-monitor vsync annoyances   
+https://github.com/vars1ty/NVIDIA-X11 
+mostly "solved" through this. Although you will ALWAYS be limited to one vsync refresh rate, I just made it my primary monitor (the highest)   
+
+## Monitor setup  
+You will need to customize `/home/.xinitrc` to whatever your monitor setup is using `xrandr`
 
 ## Realtek USB wifi adapter nonsense 
 USB boots into CDROM mode sometimes. Install usb-modeswitch   
