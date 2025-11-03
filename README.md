@@ -1,58 +1,74 @@
-# TreeOfSelf's Debian 13 Setup
-## Oh the joys of Linux desktop 
+# TreeOfSelf's Debian 13
 
-#### nvidia-driver
-Installing through apt is broken on Debian 13 (currently at least?)  
-https://www.nvidia.com/en-us/drivers/unix/  
-Download directly from here.     
+## Graphics & Display
 
-#### x11 multi-monitor vsync annoyances   
-https://github.com/vars1ty/NVIDIA-X11 
-mostly "solved" through this. Although you will ALWAYS be limited to one vsync refresh rate, I just made it my primary monitor (the highest)   
+### NVIDIA Driver Installation
+APT installation currently broken on Debian 13. Download driver directly from nvidia.com/drivers/unix
 
-#### Monitor setup  
-You will need to customize `/home/.xinitrc` to whatever your monitor setup is using `xrandr`
+### X11 Multi-Monitor VSync
+Solution: NVIDIA-X11 (github.com/vars1ty/NVIDIA-X11)
+Note: VSync limited to single refresh rate across monitors. Set primary monitor to highest refresh rate.
 
-#### Realtek USB wifi adapter nonsense 
-USB boots into CDROM mode sometimes. Install usb-modeswitch   
-`sudo nano /etc/udev/rules.d/90-rtl8188gu.rules`  
-```ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", ATTR{idProduct}=="1a2b", "RUN+="/usr/sbin/usb_modeswitch -v 0bda -p 1a2b -J"```   
-This makes it so on boot and USB plugin, it switches to proper mode.   
+### Monitor Configuration
+Customize ~/.xinitrc with xrandr commands for your monitor layout.
 
-#### Global clipboard
-Linux has a really jank clipboard implementation. Close a program, clipboard is gone. And st has a seperate clipboard that works terribly.   
-To fix this, install clipmenu & clipnotify. Then the script in `.xinitrc` will handle unifying one global clipboard and making it so it won't forget when programs close.
+## Hardware Issues
 
-#### Capslock nonsense  
-Linux has a long-standing bug with Caps lock key having weird behavior. When enabling capslock, it instantly enables on keydown. But when DISABLING capslock, it only disables when the key is actually released. `.xinitrc` has a script to run capslock-fix.sh to fix this
+### Realtek USB WiFi Adapter
+Adapter boots into CDROM mode by default. Fix:
 
-#### Ungoogled Chromium segfault
-When using Ungoogled Chromium, I faced a segfault anytime the file browser opened, which required installing `apt install xdg-desktop-portal-gtk` or something like that. If you do apt install chromium, all the dep packages work for Ungoogled Chromium too (but is probably overkill). 
+1. Install usb-modeswitch
+2. Create /etc/udev/rules.d/90-rtl8188gu.rules:
+   ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", ATTR{idProduct}=="1a2b", RUN+="/usr/sbin/usb_modeswitch -v 0bda -p 1a2b -J"
+3. `sudo udevadm control --reload`
+4. `sudo udevadm trigger`
 
-#### Force default browser
-Clicking set default browser in Chromium didn't work for me. I had to 
-create `~/.local/share/applications/ungoogled-chromium.desktop`
+## System Utilities
 
-```
-[Desktop Entry]
-Version=1.0
-Name=Ungoogled Chromium
-Exec=/home/sebastian/ungoogled-chromium/chrome-wrapper %U
-Terminal=false
-Type=Application
-Icon=chromium
-Categories=Network;WebBrowser;
-MimeType=x-scheme-handler/unknown;x-scheme-handler/about;text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
-```
+### Global Clipboard Management
+Linux clipboard clears when applications closed, and isn't unified with st. Solution:
+Install clipmenu and clipnotify. Configuration in `.xinitrc` to unify clipboard behavior across applications & save when closed.
 
-then `xdg-settings set default-web-browser ungoogled-chromium.desktop`
+### Caps Lock Key Behavior
+Linux has inconsistent Caps Lock behavior (instant on keydown, delayed off on keyup). Fixed with `capslock-fix.sh` script in `.xinitrc`
 
-#### Theming 
-Theming in linux is a bit all over the place. I was able to get most of the theming I wanted using `.Xresources` & `~/.config/gtk-3.0/settings.ini`   
-For my themeing, I used Tamzen font but you could use anything (you will have to also update the dwm/st patches).
+## Browser Setup
 
-#### dwm changes   
-Dark themed, tiled ONLY, new windows don't take primary, CLICK to focus (no hover nonsense), Windows key  AND no SHIFT unless needed. 
+### Ungoogled Chromium Segfault
+File browser causes segfault. Install `xdg-desktop-portal-gtk` to resolve(?).  
+Alternatively- all of the dep from `apt install chromium` should fix it but probably overkill.
 
-#### st changes
-scrollback, WAY better highlighting (you dont highlight blank stuff), BETTER copying middle/right click, either copy whats highlighted or paste if nothing highlighted.
+### Setting Default Browser
+Manual configuration required:
+
+1. Create `~/.local/share/applications/ungoogled-chromium.desktop`:
+   ```[Desktop Entry]
+   Version=1.0
+   Name=Ungoogled Chromium
+   Exec=/home/username/ungoogled-chromium/chrome-wrapper %U
+   Terminal=false
+   Type=Application
+   Icon=chromium
+   Categories=Network;WebBrowser;
+   MimeType=x-scheme-handler/unknown;x-scheme-handler/about;text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;```
+
+2. Run: `xdg-settings set default-web-browser ungoogled-chromium.desktop`
+
+## Theming
+
+Configure appearance through `.Xresources` and `~/.config/gtk-3.0/settings.ini`
+My font: Tamzen (requires updates to dwm/st patches)
+
+## Window Manager Customizations
+
+### dwm Modifications
+- Dark theme
+- Tiled layout only
+- New windows don't steal focus
+- Click-to-focus (no hover)
+- Windows key bindings (no Shift unless necessary)
+
+### st Modifications
+- Scrollback support
+- Improved text selection (no empty space highlighting)
+- Enhanced copy/paste: middle/right click copies selection or pastes if nothing selected
