@@ -25,6 +25,27 @@ To fix this, install clipmenu & clipnotify. Then the script in `.xinitrc` will h
 #### Capslock nonsense  
 Linux has a long-standing bug with Caps lock key having weird behavior. When enabling capslock, it instantly enables on keydown. But when DISABLING capslock, it only disables when the key is actually released. `.xinitrc` has a script to run capslock-fix.sh to fix this
 
+#### Ungoogled Chromium segfault
+When using Ungoogled Chromium, I faced a segfault anytime the file browser opened, which required installing `apt install xdg-desktop-portal-gtk` or something like that. If you do apt install chromium, all the dep packages work for Ungoogled Chromium too (but is probably overkill). 
+
+#### Force default browser
+Clicking set default browser in Chromium didn't work for me. I had to 
+create `~/.local/share/applications/ungoogled-chromium.desktop`
+
+```
+[Desktop Entry]
+Version=1.0
+Name=Ungoogled Chromium
+Exec=/home/sebastian/ungoogled-chromium/chrome-wrapper %U
+Terminal=false
+Type=Application
+Icon=chromium
+Categories=Network;WebBrowser;
+MimeType=x-scheme-handler/unknown;x-scheme-handler/about;text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
+```
+
+then `xdg-settings set default-web-browser ungoogled-chromium.desktop`
+
 #### Theming 
 Theming in linux is a bit all over the place. I was able to get most of the theming I wanted using `.Xresources` & `~/.config/gtk-3.0/settings.ini`   
 For my themeing, I used Tamzen font but you could use anything (you will have to also update the dwm/st patches).
