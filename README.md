@@ -1,4 +1,5 @@
 # TreeOfSelf's Debian 13 Setup
+## Oh the joys of Linux desktop 
 
 #### nvidia-driver
 Installing through apt is broken on Debian 13 (currently at least?)  
