@@ -54,10 +54,13 @@ Manual configuration required:
 
 2. Run: `xdg-settings set default-web-browser ungoogled-chromium.desktop`
 
+## autostart.sh
+Under `/home/.config/dwm/autostart.sh` you can configure programs to autostart. 
+
 ## Theming
 
 Configure appearance through `.Xresources` and `~/.config/gtk-3.0/settings.ini`
-My font: Tamzen (requires updates to dwm/st patches)
+Font for dwm: Tamzen (hardcoded in patch... probably not the best idea wwoops).
 
 ## Window Manager Customizations
 
@@ -67,6 +70,7 @@ My font: Tamzen (requires updates to dwm/st patches)
 - New windows don't steal focus
 - Click-to-focus (no hover)
 - Windows key bindings (no Shift unless necessary)
+- No urgent tabs
 
 ### st Modifications
 - Scrollback support
