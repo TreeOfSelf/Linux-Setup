@@ -1,6 +1,6 @@
 Only in dwm: .claude
 diff -up -x '*.patch' -x '*.o' -x dwm -x config.h dwm-original/config.def.h dwm/config.def.h
---- dwm-original/config.def.h	2025-11-04 12:58:23.129240275 -0800
+--- dwm-original/config.def.h	2025-11-04 13:00:26.042689965 -0800
 +++ dwm/config.def.h	2025-11-04 12:50:01.177884009 -0800
 @@ -5,13 +5,14 @@ static const unsigned int borderpx  = 1;
  static const unsigned int snap      = 32;       /* snap pixel */
@@ -120,7 +120,7 @@ diff -up -x '*.patch' -x '*.o' -x dwm -x config.h dwm-original/config.def.h dwm/
  	{ ClkTagBar,            0,              Button1,        view,           {0} },
  	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 diff -up -x '*.patch' -x '*.o' -x dwm -x config.h dwm-original/dwm.c dwm/dwm.c
---- dwm-original/dwm.c	2025-11-04 12:58:23.129240275 -0800
+--- dwm-original/dwm.c	2025-11-04 13:00:26.042689965 -0800
 +++ dwm/dwm.c	2025-11-03 17:13:30.443935520 -0800
 @@ -91,7 +91,7 @@ struct Client {
  	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
