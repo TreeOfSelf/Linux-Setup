@@ -5,7 +5,6 @@ clipmenud &
 while clipnotify -s clipboard; do
     xclip -o -selection clipboard | xclip -i -selection clipboard -loops 0
 done &
-sh ~/scripts/capslock-fix.sh
 ~/.config/dwm/autostart.sh &
 exec dwm
 

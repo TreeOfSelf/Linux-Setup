@@ -39,7 +39,7 @@ while ! wmctrl -lx | grep "st-root.st-256color"; do sleep 0.1; done
 echo "st-root launched"
 
 echo "Launching st-alt..."
-st -n st-alt -e su - &
+st -n st-alt &
 while ! wmctrl -lx | grep "st-alt.st-256color"; do sleep 0.1; done
 echo "st-alt launched"
 
