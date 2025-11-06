@@ -30,7 +30,7 @@ Linux clipboard clears when applications closed, and isn't unified with st. Solu
 Install clipmenu and clipnotify. Configuration in `.xinitrc` to unify clipboard behavior across applications & save when closed.
 
 ### Caps Lock Key Behavior
-Linux has inconsistent Caps Lock behavior (instant on keydown, delayed off on keyup). Fixed with `capslock-fix.sh` script in `.xinitrc`
+https://github.com/TreeOfSelf/Linux-Capslock-Fix
 
 ## Browser Setup
 
