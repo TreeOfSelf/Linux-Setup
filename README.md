@@ -32,6 +32,12 @@ Install clipmenu and clipnotify. Configuration in `.xinitrc` to unify clipboard 
 ### Caps Lock Key Behavior
 https://github.com/TreeOfSelf/Linux-Capslock-Fix
 
+### Fix Time Compatbility With Windows
+Run `timedatectl set-local-rtc 1 --adjust-system-clock`
+
+### Alt Codes for Linux
+https://github.com/schorschii/AltCodes4Linux
+
 ## Browser Setup
 
 ### Ungoogled Chromium Segfault
@@ -75,4 +81,4 @@ Font for dwm: Tamzen (hardcoded in patch... probably not the best idea wwoops).
 ### st Modifications
 - Scrollback support
 - Improved text selection (no empty space highlighting)
-- Enhanced copy/paste: middle/right click copies selection or pastes if nothing selected
+- Enhanced copy/paste: right click copies selection or pastes if nothing selected
