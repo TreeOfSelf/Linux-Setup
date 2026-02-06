@@ -9,6 +9,14 @@ APT installation currently broken on Debian 13. Download driver directly from nv
 Solution: NVIDIA-X11 (github.com/vars1ty/NVIDIA-X11)
 Note: VSync limited to single refresh rate across monitors. Set primary monitor to highest refresh rate.
 
+### Spotify app lags, browser requires widevine
+chrome \
+  --enable-widevine \
+  --widevine-path="$HOME/.config/chromium/WidevineCdm" \
+  --widevine-cdm-version=4.10.2710.0 
+
+(Isn't Linux so fun?)
+
 ### Monitor Configuration
 Customize ~/.xinitrc with xrandr commands for your monitor layout.
 
