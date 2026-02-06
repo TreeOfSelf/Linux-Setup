@@ -22,10 +22,15 @@ while ! wmctrl -lx | grep "st-main.st-256color"; do sleep 0.1; done
 echo "st-main launched"
 
 # Monitor 0 - Tag 2
-echo "Launching Spotify..."
-spotify &
-while ! wmctrl -l | grep -i "spotify"; do sleep 0.1; done
-echo "Spotify launched"
+echo "Launching Chromium Spotify..."
+chrome \
+  --class=chromium-spotify \
+  --enable-widevine \
+  --widevine-path="$HOME/.config/chromium/WidevineCdm" \
+  --widevine-cdm-version=4.10.2710.0 \
+  https://open.spotify.com &
+while ! wmctrl -lx | grep -i "chromium-spotify"; do sleep 0.1; done
+echo "Chromium Spotify launched"
 
 echo "Launching Chrome Discord..."
 chrome --class=chromium-discord --user-data-dir="$HOME/.chromium/chrome-discord" https://discord.com/channels/@me &
